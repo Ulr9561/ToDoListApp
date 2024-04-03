@@ -6,8 +6,20 @@
         "build": "vite build"
     },
     "devDependencies": {
-        "axios": "^1.6.4",
+        "@types/react": "^18.2.74",
+        "@types/react-beautiful-dnd": "^13.1.8",
+        "@types/react-dom": "^18.2.23",
+        "@types/uuid": "^9.0.8",
+        "axios": "^1.6.7",
+        "file-loader": "^6.2.0",
         "laravel-vite-plugin": "^1.0.0",
+        "prettier": "^3.2.5",
         "vite": "^5.0.0"
+    },
+    "dependencies": {
+        "react-beautiful-dnd": "^13.1.1",
+        "react-icons": "^5.0.1",
+        "typescript": "^5.4.3",
+        "uuid": "^9.0.1"
     }
 }

@@ -1,0 +1,286 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+.login-container {
+    min-height: 100vh;
+    margin-top: 0;
+    padding-top: 30px;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(to right, #29335C 50%, #9333EA);
+    color: #FFFFFF;
+}
+
+.container:hover{
+    transition: 3s;
+    background-color: #232836;
+}
+
+
+.container {
+    width: 420px;
+    margin-left: 35%;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .2);
+    color: #fff;
+    border-radius: 10px;
+    padding: 30px 40px;
+    align-items: center;
+    box-shadow: -2px 2px 5px 5px indigo;
+    justify-content: center;  
+}
+
+.container h1 {
+    font-size: 36px;
+    text-align: center;
+}
+
+.container form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex-grow: 1;
+    padding-bottom: 1rem;
+}
+
+.container .input-box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+}
+
+.container .input-box.password {
+    margin-bottom: 60px;
+    margin-top: 20px;
+    transition: 5s;
+}
+.container .input-box.username {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.input-box input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    outline: none;
+    border: 2px solid rgba(255, 255, 255, .2);
+    color: #fff;
+    font-size: 16px;
+    padding: 20px 45px 20px 20px;
+    border-radius: 40px;
+}
+
+.input-box input::placeholder {
+    color: #fff;
+}
+
+.instructions {
+    font-size: 0.75rem;
+    border-radius: 0.5rem;
+    display: flex;
+    background: red;
+    color: #fff;
+    padding: 0.25rem;
+    position: relative;
+    bottom: 1px;
+    margin-top: 10px;
+}
+
+.input-box .input-error {
+    border: 1px solid red;
+}
+.instructions > svg {
+    margin-right: 0.25rem;
+}
+
+.offscreen {
+    position: absolute;
+    left: -9999px;
+}
+
+.hide {
+    display: none;
+}
+
+.valid {
+    color: limegreen;
+    margin-left: 0.25rem;
+}
+
+.invalid {
+    color: red;
+    margin-left: 0.25rem;
+}
+
+.errmsg {
+    background-color: lightpink;
+    color: firebrick;
+    font-weight: bold;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.input-box .icon {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+}
+
+
+.container .remember-forgot { 
+    display: flex;
+    justify-content: space-between;
+    font-size: 14.5px;
+    margin: -15px 0 25px;
+}
+
+.remember-forgot label input {
+    accent-color: #fff;
+    margin-right: 4px;
+}
+
+.remember-forgot a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.remember-forgot a:hover {
+    text-decoration: underline;
+}
+
+.container button {
+    width: 100%;
+    height: 40px;
+    background: #fff;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    font-size: 16px;
+    color: #333;
+    font-weight: 700;
+    margin-top: 15px;
+}
+
+.container button:hover {
+    background: linear-gradient(indigo, purple);
+}
+
+.container button:active {
+    transform: scale(.95);
+}
+
+.container button:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    
+}
+
+.container .register-link {
+    font-size: 14.5px;
+    text-align: center;
+    margin-top: 20px 0 15px;
+}
+
+.register-link p a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.register-link p a:hover {
+    text-decoration: underline;
+}
+
+.line{
+    position: relative;
+    width: 100%;
+    height: 1px;
+    background: rgba(255, 255, 255, .2);
+    margin: 36px 0;
+}
+
+.line::before {
+    content: "or";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    color: #8b8b8b;
+    padding: 0 15px;    
+}
+
+.media-options a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50px;
+    margin: auto 0px 25px auto;
+    border-radius: 10px;
+    text-decoration: none;
+}
+.media-options a:active {
+    transform: scale(.95);
+}
+
+.media-options a:hover{
+    background: linear-gradient(indigo, purple);
+}
+
+a.facebook {
+    color: #fff;
+    border: 1px solid #fff;
+    background-color: #4267b2;
+}
+
+a.facebook .facebook-icon {
+    height: 20px;
+    width: 20px;
+    color: #4267b2;
+    font-size: 20px;
+    border-radius: 50%;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    
+}
+
+
+.google-icon {
+    height: 20px;
+    width: 20px;
+    object-fit: cover;
+    margin-right: 30px;
+}
+
+a.google{
+    border: 1px solid #CACACA;
+    color: #fff;
+}
+
+a.google span {
+    font-weight: 500;
+    opacity: 0.6;
+    color: white;
+    margin-left: -15px;
+}
+
+@media screen and (max-width: 400px) {
+    .container {
+        margin-left: auto;
+        margin-right: auto;
+        width: 90%;
+        padding: 30px 20px;
+        box-shadow: -2px 2px 2px 2px darkblue;
+    }
+}
