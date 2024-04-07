@@ -1,5 +1,4 @@
 import React from 'react';
-import AuthUser from './hooks/AuthUser';
 
 const App: React.FC = () => {
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function About() {
+export const About: React.FC = () => {
 	return (
 		<>
 			<div className="text-6xl font-bold text-slate-600">About Us</div>

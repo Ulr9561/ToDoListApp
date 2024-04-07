@@ -9,9 +9,11 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class AuthController extends Controller {
+class AuthController extends Controller
+{
 
-    public function register(RegisterRequest $request) {
+    public function register(RegisterRequest $request)
+    {
 
         $data = $request->validated();
 
@@ -27,11 +29,12 @@ class AuthController extends Controller {
 
         return response()->json([
             'user' => new UserResource($user),
-            'token'=> $token,
+            'token' => $token,
         ])->withCookie($cookie);
     }
 
-    public function login(LoginRequest $request) {
+    public function login(LoginRequest $request)
+    {
         $data = $request->validated();
 
         $user = User::where('username', $data['username'])->first();
@@ -51,7 +54,8 @@ class AuthController extends Controller {
         ])->withCookie($cookie);
     }
 
-    public function logout(Request $request) {
+    public function logout(Request $request)
+    {
         $request->user()->currentAccessToken()->delete();
 
         $cookie = cookie()->forget('token');
@@ -61,7 +65,29 @@ class AuthController extends Controller {
         ])->withCookie($cookie);
     }
 
-    public function user(Request $request) {
+    public function user(Request $request)
+    {
         return new UserResource($request->user());
+    }
+
+    public function checkemail(Request $request)
+    {
+        $email = $request->email;
+        $user = User::where('email', $email)->first();
+
+        if ($user) {
+            return response()->json([
+                'message' => 'Email Ok'
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'Email not found'
+            ], 404);
+        }
+    }
+
+    public function sendEmail(Request $request)
+    {
+
     }
 }

@@ -12,6 +12,13 @@ const axiosClient: AxiosInstance = axios.create({
         Accept: "application/json",
     },
 });
+export const axiosCl: AxiosInstance = axios.create({
+    baseURL: "http://localhost:8000/api",
+    headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+    },
+});
 
 axiosClient.interceptors.request.use(async (config) => {
     const accessToken = localStorage.getItem("access_token");

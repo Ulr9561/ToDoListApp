@@ -6,7 +6,7 @@ const GuestLayout: React.FC = () => {
     const { user } = AuthUser();
 
     if (user) {
-        return <Navigate to={'/dashboard'} />;
+        return <Navigate to={'/home'} />;
     }
 
     return (

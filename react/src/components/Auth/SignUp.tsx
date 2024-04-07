@@ -1,11 +1,12 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { FaUser, FaLock, FaInfoCircle, FaEnvelope } from 'react-icons/fa';
-import { IoLogoFacebook } from 'react-icons/io5';
-import { FcGoogle } from 'react-icons/fc';
-import axiosClient from '../axios';
-import AuthUser from '../hooks/AuthUser';
-import { Navigate } from 'react-router-dom';
-import '../styles/Register.css'
+import React, { useState, useRef, useEffect } from "react";
+import { FaUser, FaLock, FaInfoCircle, FaEnvelope, FaEye, FaEyeSlash } from "react-icons/fa";
+import { IoLogoFacebook } from "react-icons/io5";
+import { FcGoogle } from "react-icons/fc";
+import axiosClient from "../../axios";
+import AuthUser from "../../hooks/AuthUser";
+import { Navigate } from "react-router-dom";
+import "../../styles/Register.css";
+import { GoogleLogin } from "@react-oauth/google";
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -14,19 +15,25 @@ const SignUp: React.FC = () => {
     const userRef = useRef<HTMLInputElement>(null);
     const errRef = useRef<HTMLParagraphElement>(null);
 
-    const [username, setUsername] = useState('');
+    const [username, setUsername] = useState("");
     const [validName, setValidName] = useState(false);
     const [userFocus, setUserFocus] = useState(false);
 
-    const [password, setPassword] = useState('');
+    const [password, setPassword] = useState("");
     const [validPassword, setValidPassword] = useState(false);
     const [passwordFocus, setPasswordFocus] = useState(false);
 
-    const [email, setEmail] = useState('');
+    const [email, setEmail] = useState("");
     const [validEmail, setValidEmail] = useState(false);
     const [emailFocus, setEmailFocus] = useState(false);
 
-    const [errMsg, setErrMsg] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
+
+    const togglePasswordVisibility = () => {
+        setShowPassword((prevShowPassword) => !prevShowPassword);
+    };
+
+    const [errMsg, setErrMsg] = useState("");
 
     const { setUser, csrfToken } = AuthUser();
 
@@ -35,21 +42,24 @@ const SignUp: React.FC = () => {
 
         await csrfToken();
         try {
-            const response = await axiosClient.post('/register', JSON.stringify({ username, email, password }));
+            const response = await axiosClient.post(
+                "/register",
+                JSON.stringify({ username, email, password }),
+            );
 
             if (response?.status === 200) {
                 setUser(response?.data?.user);
-                return <Navigate to={'/dashboard'} />;
+                return <Navigate to={"/dashboard"} />;
             }
             console.log(JSON.stringify(response));
         } catch (err: any) {
             console.log(err);
             if (!err?.response) {
-                setErrMsg('No Server Response');
+                setErrMsg("No Server Response");
             } else if (err.response?.status === 409) {
-                setErrMsg('Username Taken');
+                setErrMsg("Username Taken");
             } else {
-                setErrMsg('Registration Failed');
+                setErrMsg("Registration Failed");
             }
             if (errRef.current) errRef.current.focus();
         }
@@ -75,13 +85,17 @@ const SignUp: React.FC = () => {
     }, [email]);
 
     useEffect(() => {
-        setErrMsg('');
+        setErrMsg("");
     }, [username, password, email]);
 
     return (
         <div className="signup-container">
-            <div className="container">
-                <p ref={errRef} className={errMsg ? 'errmsg' : 'offscreen'} aria-live="assertive">
+            <div className="container fixed mt-[-1.5%]">
+                <p
+                    ref={errRef}
+                    className={errMsg ? "errmsg" : "offscreen"}
+                    aria-live="assertive"
+                >
                     {errMsg}
                 </p>
                 <form action="/register" method="post" onSubmit={handleSubmit}>
@@ -95,7 +109,7 @@ const SignUp: React.FC = () => {
                             autoComplete="off"
                             onChange={(e) => setUsername(e.target.value)}
                             required
-                            aria-invalid={validName ? 'false' : 'true'}
+                            aria-invalid={validName ? "false" : "true"}
                             aria-describedby="uidnote"
                             onFocus={() => setUserFocus(true)}
                             onBlur={() => setUserFocus(false)}
@@ -103,10 +117,16 @@ const SignUp: React.FC = () => {
                         <FaUser className="icon" />
                         <p
                             id="uidnote"
-                            className={userFocus && username.trim() !== '' && !validName ? 'instructions' : 'offscreen'}
+                            className={
+                                userFocus &&
+                                username.trim() !== "" &&
+                                !validName
+                                    ? "instructions"
+                                    : "offscreen"
+                            }
                         >
-                            <FaInfoCircle />
-                            4 to 24 characters. Must begin with a letter.
+                            <FaInfoCircle />4 to 24 characters. Must begin with
+                            a letter.
                         </p>
                     </div>
                     <div className="input-box email">
@@ -117,7 +137,7 @@ const SignUp: React.FC = () => {
                             autoComplete="off"
                             onChange={(e) => setEmail(e.target.value)}
                             required
-                            aria-invalid={validEmail ? 'false' : 'true'}
+                            aria-invalid={validEmail ? "false" : "true"}
                             aria-describedby="eidnote"
                             onFocus={() => setEmailFocus(true)}
                             onBlur={() => setEmailFocus(false)}
@@ -125,7 +145,11 @@ const SignUp: React.FC = () => {
                         <FaEnvelope className="icon" />
                         <p
                             id="eidnote"
-                            className={emailFocus && email.trim() !== '' && !validEmail ? 'instructions' : 'offscreen'}
+                            className={
+                                emailFocus && email.trim() !== "" && !validEmail
+                                    ? "instructions"
+                                    : "offscreen"
+                            }
                         >
                             <FaInfoCircle />
                             Enter a valid email
@@ -133,23 +157,34 @@ const SignUp: React.FC = () => {
                     </div>
                     <div className="input-box password">
                         <input
-                            type="password"
+                            type={showPassword ? "text" : "password"}
                             id="password"
                             placeholder="Enter your password"
                             onChange={(e) => setPassword(e.target.value)}
-                            aria-invalid={validPassword ? 'false' : 'true'}
+                            aria-invalid={validPassword ? "false" : "true"}
                             aria-describedby="pwdnote"
                             onFocus={() => setPasswordFocus(true)}
                             onBlur={() => setPasswordFocus(false)}
                             required
                         />
-                        <FaLock className="icon" />
+                        <div
+                            className="icon cursor-pointer"
+                            onClick={togglePasswordVisibility}
+                        >
+                            {showPassword ? <FaEye /> : <FaEyeSlash />}
+                        </div>
                         <p
                             id="pwdnote"
-                            className={passwordFocus && !validPassword ? 'instructions' : 'offscreen'}
+                            className={
+                                passwordFocus && !validPassword
+                                    ? "instructions"
+                                    : "offscreen"
+                            }
                         >
                             <FaInfoCircle />
-                            Must be 8-24 characters long. Must include uppercase and lowercase letters, a number and a special character.
+                            Must be 8-24 characters long. Must include uppercase
+                            and lowercase letters, a number and a special
+                            character.
                         </p>
                     </div>
                     <button
@@ -160,20 +195,23 @@ const SignUp: React.FC = () => {
                         SignUp
                     </button>
                     <div className="register-link">
-                        <p>{"Already have an account? "} <a href="/login">Login</a></p>
+                        <p>
+                            {"Already have an account? "}{" "}
+                            <a href="/login">Login</a>
+                        </p>
                     </div>
                 </form>
 
                 <div className="line"></div>
 
                 <div className="media-options">
-                    <a href="#" className="field facebook">
+                    <a href="#" className="field facebook hover:bg-sky-600">
                         <IoLogoFacebook className="facebook-icon" />
                         <span>SignUp with Facebook</span>
                     </a>
                 </div>
                 <div className="media-options">
-                    <a href="#" className="field google">
+                    <a href="#" className="field google hover:bg-stone-900">
                         <FcGoogle className="google-icon" />
                         <span>SignUp with Google</span>
                     </a>
