@@ -29,6 +29,8 @@ const DefaultLayout: React.FC = () => {
         };
     }, []);
 
+    
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -42,6 +44,7 @@ const DefaultLayout: React.FC = () => {
                     localStorage.removeItem("user");
                     console.log(err?.response?.data?.message);
                     setErr(err?.response?.data?.message);
+                    return <Navigate to={'/login'} />
                 }
             }
         };
@@ -52,11 +55,10 @@ const DefaultLayout: React.FC = () => {
     if (!user) {
         return <Navigate to="/login" />;
     }
-
     return (
         <div className="w-screen h-screen relative">
-            <Sidebar />
-            <NavbarD />
+            <Sidebar/>
+            <NavbarD/>
             <div className="md:pl-[250px] pl-[60px] pr-[20px] pt-[70px] w-full h-full overflow-y-auto">
                 <Outlet />
             </div>

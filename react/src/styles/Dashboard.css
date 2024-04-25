@@ -21,6 +21,7 @@
     height: 100%;
     position: absolute;
     filter: brightness(0.7);
-    background-color: #2b0131;
+    background: linear-gradient(to right, #00bcd4, #2196f3);
+    -webkit-text-fill-color: transparent;;
     z-index: -1;
 }

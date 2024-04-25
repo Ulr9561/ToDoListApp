@@ -4,10 +4,14 @@ import axiosClient from "../axios";
 interface AuthProviderProps {
     children: React.ReactNode;
 }
-
+type User = {
+    username: string;
+    id: number;
+    email: string;
+};
 const AuthContext = createContext<{
-    user: string | null;
-    setUser: (user: string | null) => void;
+    user: User | null;
+    setUser: (user: User | null) => void;
     csrfToken: () => Promise<boolean>;
 }>({
     user: null,
@@ -18,9 +22,9 @@ const AuthContext = createContext<{
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const storedUser = localStorage.getItem('user');
     const initialUser = storedUser ? JSON.parse(storedUser) : null;
-    const [user, _setUser] = useState(initialUser);
+    const [user, _setUser] = useState<User | null>(initialUser);
 
-    const setUser = (user: string | null) => {
+    const setUser = (user: User | null) => {
         if (user !== null) {
             localStorage.setItem('user', JSON.stringify(user));
         } else {

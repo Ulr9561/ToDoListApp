@@ -6,7 +6,6 @@ import axiosClient from "../../axios";
 import AuthUser from "../../hooks/AuthUser";
 import { Navigate } from "react-router-dom";
 import "../../styles/Register.css";
-import { GoogleLogin } from "@react-oauth/google";
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -49,7 +48,7 @@ const SignUp: React.FC = () => {
 
             if (response?.status === 200) {
                 setUser(response?.data?.user);
-                return <Navigate to={"/dashboard"} />;
+                return <Navigate to={"/home"} />;
             }
             console.log(JSON.stringify(response));
         } catch (err: any) {

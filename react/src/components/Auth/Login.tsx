@@ -28,7 +28,7 @@ const Login: React.FC = () => {
     };
 
     const [errMsg, setErrMsg] = useState<string>("");
-    const { setUser, csrfToken } = AuthUser();
+    const { setUser, user } = AuthUser();
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
@@ -39,8 +39,8 @@ const Login: React.FC = () => {
             console.log(JSON.stringify(response?.data));
             if (response.status === 200) {
                 setUser(response?.data?.user);
-
-                return <Navigate to={"/dashboard"} />;
+                console.log(user);
+                return <Navigate to={"/home"} />;
             }
         } catch (err: any) {
             console.log(err);
@@ -51,7 +51,7 @@ const Login: React.FC = () => {
             } else if (err.response?.status === 401) {
                 setErrMsg("Unauthorized");
             } else if (err.response?.status === 422) {
-                setErrMsg("Username or password is incorrect");
+                setErrMsg("This credentials doesn't match our records!");
             } else {
                 setErrMsg("Login Failed");
             }

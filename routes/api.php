@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BoardController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,5 +25,6 @@ Route::middleware(['logger'])->group(function () {
     Route::middleware('auth:sanctum')->group(function () {
         Route::post('/logout', [AuthController::class, 'logout']);
         Route::get('/user', [AuthController::class, 'user']);
+        Route::get('/userBoard', [BoardController::class,'getBoardData'])->name('');
     });
 });

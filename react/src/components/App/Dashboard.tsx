@@ -1,23 +1,40 @@
 // import React from 'react'
-import "../styles/Dashboard.css";
+import "../../styles/Dashboard.css";
 import { useEffect, useState } from "react";
-import { Columns } from "../types";
+import { Columns } from "../../types";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { Board } from "../data/board";
+import { fetchUserData, transformDataToBoard } from "../../data/board";
 import { AddOutline } from "react-ionicons";
-import Task from "./Task";
-import AddModal from "./Modal/AddModal";
-import { onDragEnd } from "../helpers/onDragEnd";
+import Task from "../Task";
+import AddModal from "../Modal/AddModal";
+import { onDragEnd } from "../../helpers/onDragEnd";
 
 export default function Dashboard() {
-    const [columns, setColumns] = useState<Columns>(Board);
+    const [columns, setColumns] = useState<Columns>({});
     const [modalOpen, setModalOpen] = useState(false);
     const [selectedColumn, setSelectedColumn] = useState("");
+
 
     const openModal = (columnId: any) => {
         setSelectedColumn(columnId);
         setModalOpen(true);
     };
+
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const data = await fetchUserData();
+                console.log(data)
+                if (data) {
+                    setColumns(transformDataToBoard(data)); // Utiliser la fonction de transformation pour mettre à jour columns
+                }
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        }
+
+        fetchData();
+    }, []);
 
     const closeModal = () => {
         setModalOpen(false);
@@ -27,7 +44,7 @@ export default function Dashboard() {
         const newBoard = { ...columns };
         newBoard[selectedColumn].items.push(taskData);
     };
-    
+
     return (
         <>
             <DragDropContext
@@ -53,12 +70,11 @@ export default function Dashboard() {
                                         </div>
                                         {column.items.map(
                                             (task: any, index: any) => (
-                                                <Draggable 
+                                                <Draggable
                                                     key={task.id.toString()}
                                                     draggableId={task.id.toString()}
                                                     index={index}
-                                                >   
-    
+                                                >
                                                     {(provided: any) => (
                                                         <>
                                                             <Task

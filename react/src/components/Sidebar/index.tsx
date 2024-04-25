@@ -3,17 +3,20 @@ import {
     GridOutline,
     HomeOutline,
     LogOutOutline,
-    NewspaperOutline,
     NotificationsOutline,
     PeopleOutline,
-    PieChartOutline,
+    ChatbubbleEllipsesOutline,
+    SettingsOutline,
 } from "react-ionicons";
 import { handleLogout } from "../../layouts/DefaultLayout";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useNavigation } from "../../providers/NavigationProvider";
 
-const Sidebar = () => {
-    const handlePage = () => {};
+
+const Sidebar: React.FC = () => {
+
+    const { reset, isNotificationsActive, isSettingsActive, setSettingsActive, setNotificationsActive } = useNavigation();
 
     const [navLinks, setNavLinks] = useState([
         {
@@ -35,22 +38,22 @@ const Sidebar = () => {
             active: false,
         },
         {
-            title: "Analytics",
-            element: "analytics",
+            title: "Teams",
+            element: "teams",
             icon: (
-                <PieChartOutline
-                    color={"#555"}
-                    width={"22px"}
-                    height={"22px"}
-                />
+                <PeopleOutline color={"#555"} width={"22px"} height={"22px"} />
             ),
             active: false,
         },
         {
-            title: "Workflows",
-            element: "workflows",
+            title: "FAQs",
+            element: "faqs",
             icon: (
-                <PeopleOutline color={"#555"} width={"22px"} height={"22px"} />
+                <ChatbubbleEllipsesOutline
+                    color={"#555"}
+                    width={"25px"}
+                    height={"25px"}
+                />
             ),
             active: false,
         },
@@ -64,28 +67,37 @@ const Sidebar = () => {
                     height={"22px"}
                 />
             ),
-            active: false,
+            active: isNotificationsActive,
         },
         {
-            title: "Newsletter",
-            element: "newsletter",
+            title: "Settings",
+            element: "settings",
             icon: (
-                <NewspaperOutline
+                <SettingsOutline
                     color={"#555"}
-                    width={"22px"}
-                    height={"22px"}
+                    width={"24px"}
+                    height={"24px"}
                 />
             ),
-            active: false,
+            active: isSettingsActive,
         },
     ]);
-
-    const handleLinkClick = (index: any) => {
+    
+    const handleLinkClick = (index: any, element: string) => {
+        reset();
         const updatedLinks = [...navLinks];
         updatedLinks.forEach((link, i) => {
             link.active = i === index;
         });
         setNavLinks(updatedLinks);
+        if (element === "settings") {
+            setSettingsActive(true);
+        }
+        else if (element === "notifications") {
+            setNotificationsActive(true);
+        } else {
+            reset();
+        }
     };
     return (
         <div className="fixed left-0 top-0 md:w-[230px] w-[60px] overflow-hidden h-full flex flex-col">
@@ -112,7 +124,7 @@ const Sidebar = () => {
                         ></path>
                     </svg>
                 </span>
-                <span className="text-indigo-950 font-semibold text-2xl md:block hidden">
+                <span className="text-cyan-700 font-semibold text-2xl md:block hidden">
                     TDLApp
                 </span>
             </div>
@@ -122,12 +134,12 @@ const Sidebar = () => {
                         <Link
                             to={`/${link.element.toLowerCase()}`}
                             key={link.title}
-                            className={`flex items-center gap-2 w-full rounded-lg hover:bg-indigo-950 hover:text-white px-2 py-3 cursor-pointer ${
+                            className={`flex items-center gap-2 w-full rounded-lg hover:bg-gradient-to-r from-cyan-500 to-blue-500 hover:text-white px-2 py-3 cursor-pointer ${
                                 link.active
-                                    ? "bg-indigo-950 text-white"
+                                    ? "bg-gradient-to-r from-cyan-500 to-blue-500 text-white"
                                     : "bg-transparent"
                             }`}
-                            onClick={() => handleLinkClick(index)}
+                            onClick={() => handleLinkClick(index, link.element)}
                         >
                             {link.icon}
                             <span className="font-medium text-[15px] md:block hidden">
@@ -137,7 +149,7 @@ const Sidebar = () => {
                     );
                 })}
                 <button
-                    className="flex absolute bottom-4 items-center md:justify-start justify-center gap-2 md:w-[90%] w-[70%] rounded-lg hover:bg-indigo-950 hover:text-white px-2 py-3 cursor-pointer bg-gray-200"
+                    className="flex absolute bottom-4 items-center md:justify-start justify-center gap-2 md:w-[90%] w-[70%] rounded-lg hover:bg-gradient-to-r from-cyan-500 to-blue-500 hover:text-white px-2 py-3 cursor-pointer bg-gray-200"
                     onClick={handleLogout}
                 >
                     <LogOutOutline />
