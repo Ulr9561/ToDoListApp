@@ -1,21 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import {
-    MDBCol,
-    MDBContainer,
-    MDBRow,
-    MDBCard,
-    MDBCardText,
-    MDBCardBody,
-    MDBCardImage,
-    MDBBtn,
-    MDBTypography,
-    MDBIcon,
-} from "mdb-react-ui-kit";
 import taskImage from "../../assets/images/task.jpg";
 import { useNavigation } from "../../providers/NavigationProvider";
-import { AddCircleOutline } from "react-ionicons";
 import AuthUser from "../../hooks/AuthUser";
+import GroupAddOutlinedIcon from "@mui/icons-material/GroupAddOutlined";
+import DashboardCustomizeOutlinedIcon from "@mui/icons-material/DashboardCustomizeOutlined";
 
 export const Home: React.FC = () => {
     const { user, setUser } = AuthUser();
@@ -125,11 +113,6 @@ export const Home: React.FC = () => {
                                 <div>15</div>
                             </li>
                         </ul>
-                        <div className="p-4 border-t mx-8 mt-2">
-                            <button className="w-1/2 block mx-auto rounded-full bg-gray-900 hover:shadow-lg font-semibold text-white px-6 py-2">
-                                Follow
-                            </button>
-                        </div>
                     </div>
                 </div>
                 <div className="flex-1 py-4 w-[100%] mr-[10px] bg-transparent rounded-t-lg rounded-b-lg">
@@ -139,51 +122,68 @@ export const Home: React.FC = () => {
                 </div>
             </div>
             <div className="w-full h-[30%] my-[10px] flex items-center justify-center ">
-                <div className="w-[25%] h-[50%] bg-gray-500 mx-[10px] flex items-center justify-start rounded-md hover:bg-gray-400">
-                    <div className="w-full h-full text-center items-center py-[9%] flex px-[5%] overflow-x-auto cursor-pointer">
-                        <h1 className="text-white px-[10px] pr-[50px]">
-                            Create Team
-                        </h1>
-                        <AddCircleOutline
-                            color={"#fff"}
-                            width="30px"
-                            height="30px"
-                        />
+                <a className="w-[25%] group block max-w-xs mx-auto rounded-lg p-4 bg-white ring-1 ring-slate-900/5 shadow-lg space-y-3 hover:bg-sky-500 hover:ring-sky-500">
+                    <div className="flex items-center space-x-3 overflow-x-auto cursor-pointer">
+                        <GroupAddOutlinedIcon className="text-sky-500 group-hover:text-white" />
+                        <h3 className="text-sm text-slate-900 font-semibold group-hover:text-white">
+                            New Team
+                        </h3>
                     </div>
-                </div>
+                    <p className="text-sm text-slate-500 group-hover:text-white">
+                        Create a new team to access a variety of starting
+                        templates.
+                    </p>
+                </a>
 
-                <div className="w-[25%] h-[50%] bg-gray-500 mx-[10px] flex items-center justify-start rounded-md hover:bg-gray-400">
-                    <div className="w-full h-full text-center items-center py-[9%] flex px-[5%] overflow-x-auto cursor-pointer">
-                        <h1 className="text-white px-[10px] pr-[50px]">
+                <a className="w-[25%] group block max-w-xs mx-auto rounded-lg p-4 bg-white ring-1 ring-slate-900/5 shadow-lg space-y-3 hover:bg-sky-500 hover:ring-sky-500">
+                    <div className="flex items-center space-x-3 overflow-x-auto cursor-pointer">
+                        <svg
+                            className="h-6 w-6 stroke-sky-500 group-hover:stroke-white"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M11 19H6.931A1.922 1.922 0 015 17.087V8h12.069C18.135 8 19 8.857 19 9.913V11"
+                            ></path>
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M14 7.64L13.042 6c-.36-.616-1.053-1-1.806-1H7.057C5.921 5 5 5.86 5 6.92V11M17 15v4M19 17h-4"
+                            ></path>
+                        </svg>
+                        <h3 className="text-sm text-slate-900 font-semibold group-hover:text-white">
                             New Project
-                        </h1>
-                        <AddCircleOutline
-                            color={"#fff"}
-                            width="30px"
-                            height="30px"
-                        />
+                        </h3>
                     </div>
-                </div>
-                <div className="w-[25%] h-[50%] bg-gray-500 mx-[10px] flex items-center justify-start rounded-md hover:bg-gray-400">
-                    <div className="w-full h-full text-center items-center py-[9%] flex px-[5%] overflow-x-auto cursor-pointer ">
-                        <h1 className="text-white px-[10px] pr-[50px]">
-                            Create New Board
-                        </h1>
-                        <AddCircleOutline
-                            color={"#fff"}
-                            width="30px"
-                            height="30px"
-                        />
+                    <p className="text-sm text-slate-500 group-hover:text-white">
+                        Create a new project from a variety of starting
+                        templates.
+                    </p>
+                </a>
+                <a className="w-[25%] group block max-w-xs mx-auto rounded-lg p-4 bg-white ring-1 ring-slate-900/5 shadow-lg space-y-3 hover:bg-sky-500 hover:ring-sky-500">
+                    <div className="flex items-center space-x-3 overflow-x-auto cursor-pointer">
+                        <DashboardCustomizeOutlinedIcon className="text-sky-500 group-hover:text-white" />
+                        <h3 className="text-sm text-slate-900 font-semibold group-hover:text-white">
+                            New Board
+                        </h3>
                     </div>
-                </div>
+                    <p className="text-sm text-slate-500 group-hover:text-white">
+                        Create a new dashboard to organize your projects more
+                        efficiently.
+                    </p>
+                </a>
             </div>
             <div className="w-[50%] flex items-center justify-center my-[2%] max-sm:w-full max-sm:flex-row">
                 {links.map((link, index) => {
                     return (
                         <button
                             key={link.title}
-                            className={`text-white w-full hover:bg-gray-300 hover:text-black rounded-lg py-[1px] px-[20px] mx-[10px] font-light ${
-                                link.active ? "bg-gray-300 text-black" : ""
+                            className={`text-white w-full hover:bg-sky-500 hover:text-white rounded-lg py-[1px] px-[20px] mx-[10px] font-semibold ${
+                                link.active ? "bg-sky-500" : ""
                             }`}
                             onClick={() => handleClick(index, link.element)}
                         >
@@ -192,6 +192,7 @@ export const Home: React.FC = () => {
                     );
                 })}
             </div>
+        
         </>
     );
 };
