@@ -8,13 +8,38 @@
 </p>
 
 
-## Contributing
+## About
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+This project is a TODOList Web App with kanban boards which allows user to create our boards and other projects to manage their tasks !!
 
-## Code of Conduct
+## Installation
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Clone this repository with the command 
+```bash
+
+git clone https://github.com/Ulr9561/ToDoListApp.git
+
+```
+
+Start react server which following commands
+```bash
+
+cd ToDoListApp/react
+
+npm install
+
+npm run dev
+
+```
+
+And the command 
+
+```bash
+php artisan serve --host=0.0.0.0 --port=8000
+
+```
+
+to start php server
 
 ## Security Vulnerabilities
 
