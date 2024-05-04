@@ -38,7 +38,7 @@ export const NavigationProvider: React.FC<{ children: ReactNode }> = ({
         setShareActive(false);
         setSharedFiles(false);
         setSharedProjects(false);
-        setRecentlyView(true);
+        setRecentlyView(false);
     }
 
     return (

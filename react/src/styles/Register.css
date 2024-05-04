@@ -10,7 +10,7 @@
     width: 100%;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
-    background: linear-gradient(to right, #29335C 50%, #9333EA);
+    background: #86A4A4;
     transition: color 0.2s;
     color: #FFFFFF;
 }

@@ -11,13 +11,13 @@ export async function fetchUserData() {
         const response = await axiosClient.get("/userBoard");
         if (response.status === 200) {
             console.log(response.data[0]);
+            console.log("Need", response);
             return response.data[0];
         }
     } catch (err) {
         console.log(err);
         throw err;
     }
-
     return null;
 }
 

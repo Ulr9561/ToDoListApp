@@ -8,26 +8,20 @@
     width: 100%;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
-    background: linear-gradient(to right, #29335C 50%, #9333EA);
-    color: #FFFFFF;
-}
-
-.container:hover{
-    transition: 3s;
-    background-color: #232836;
+    background: #86A4A4;
+    color: #BC544F;
 }
 
 
 .container {
     width: 420px;
     margin-left: 35%;
-    background: transparent;
+    background: #12C9E1;
     border: 2px solid rgba(255, 255, 255, .2);
-    color: #fff;
+    color: #BC544F;
     border-radius: 10px;
     padding: 30px 40px;
     align-items: center;
-    box-shadow: -2px 2px 5px 5px indigo;
     justify-content: center;  
 }
 
@@ -66,14 +60,14 @@
     background: transparent;
     outline: none;
     border: 2px solid rgba(255, 255, 255, .2);
-    color: #fff;
+    color: #BC544F;
     font-size: 16px;
     padding: 20px 45px 20px 20px;
     border-radius: 40px;
 }
 
 .input-box input::placeholder {
-    color: #fff;
+    color: #BC544F;
 }
 
 .instructions {
@@ -156,21 +150,18 @@
 .container .btn {
     width: 100%;
     height: 40px;
-    background: #fff;
+    background: #BC544F;
     border: none;
     outline: none;
     border-radius: 40px;
     cursor: pointer;
     box-shadow: 0 0 10px rgba(0, 0, 0, .1);
     font-size: 16px;
-    color: #333;
+    color: #fff;
     font-weight: 700;
     margin-top: 15px;
 }
 
-.container button:hover {
-    background: linear-gradient(indigo, purple);
-}
 
 .container button:active {
     transform: scale(.95);
