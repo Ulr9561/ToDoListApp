@@ -383,7 +383,8 @@ audio,
 iframe,
 embed,
 object {
-    display: block; /* 1 */ /* 2 */
+    display: block; /* 1 */
+    vertical-align: middle; /* 2 */
 }
 
 /*
@@ -1809,9 +1810,18 @@ video {
     stroke: #fff;
 }
 
+.hover\:bg-orange-300:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(253 186 116 / var(--tw-bg-opacity));
+}
 .group:hover .group-hover\:text-white {
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.hover\:bg-orange-500:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(249 115 22 / var(--tw-bg-opacity));
 }
 
 @media not all and (min-width: 640px) {
@@ -2008,7 +2018,7 @@ video {
     padding: 0;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
-    background: #29335c;
+    background: #131221;
     transition: color 5s;
     color: #ffffff;
 }
@@ -2049,7 +2059,7 @@ video {
     line-height: 20px;
     margin: 5% auto;
     outline: none;
-    overflow: visible;
+    overflow: hidden;
     padding: 1em 1.6em;
     text-align: center;
     text-transform: uppercase;

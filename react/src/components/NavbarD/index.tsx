@@ -97,7 +97,7 @@ const Navbar: React.FC = () => {
                         <li
                             key={index}
                             onClick={() => handleOptionSelect(option)}
-                            className="cursor-pointer py-2 px-4 hover:bg-gradient-to-r from-cyan-500 to-blue-500"
+                            className="cursor-pointer py-2 px-4 hover:bg-orange-300"
                         >
                             {option}
                         </li>

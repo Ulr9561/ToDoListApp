@@ -10,14 +10,18 @@ const axiosClient: AxiosInstance = axios.create({
     headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
+        "X-Requested-With": "XMLHttpRequest",
     },
 });
 export const axiosCl: AxiosInstance = axios.create({
-    baseURL: "http://localhost:8000/api",
+    baseURL: "http://localhost:8000/",
     headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
+        "X-Requested-With": "XMLHttpRequest",
     },
+    withCredentials: true,
 });
 
 axiosClient.interceptors.request.use(async (config) => {
@@ -25,6 +29,7 @@ axiosClient.interceptors.request.use(async (config) => {
     if (accessToken) {
         config.headers.Authorization = `Bearer ${accessToken}`;
     }
+
     return config;
 });
 

@@ -6,7 +6,7 @@ import Login from "./components/Auth/Login";
 import SignUp from "./components/Auth/SignUp";
 import ErrorPage from "./error-page";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Dashboard from "./components/App/Dashboard";
+import Board from "./components/App/Board";
 import { AuthProvider } from "./providers/AuthProvider";
 import GuestLayout from "./layouts/GuestLayout";
 import DefaultLayout from "./layouts/DefaultLayout";
@@ -53,8 +53,8 @@ const router = createBrowserRouter([
         element: <DefaultLayout />,
         children: [
             {
-                path: "/dashboard",
-                element: <Dashboard />,
+                path: "/board",
+                element: <Board />,
             },
             {
                 path: "/share",
